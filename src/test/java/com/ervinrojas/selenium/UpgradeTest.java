@@ -1,25 +1,17 @@
 package com.ervinrojas.selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import com.ervinrojas.pages.HeaderPage;
-import com.ervinrojas.pages.LoginPage;
-import com.ervinrojas.util.BaseTest;
+import com.ervinrojas.util.AuthenticatedTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Set;
 
-public class UpgradeTest extends BaseTest {
+public class UpgradeTest extends AuthenticatedTest {
 
     @Test
     public void openNewTab() throws InterruptedException {
-        // 1. Login
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("Admin", "admin123");
-
-        // 2. Clicking Upgrade button in Header layer
+        // 1. Clicking Upgrade button in Header layer
         HeaderPage headerPage = new HeaderPage(driver);
         headerPage.clickUpgradeBtn();
 

@@ -1,5 +1,6 @@
 package com.ervinrojas.pages;
 
+import com.ervinrojas.util.LocatorManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,13 +14,11 @@ public class UserManagementPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
-
+    private LocatorManager locators = LocatorManager.getInstance();
     // Locators
-    private By adminLink = By.linkText("Admin");
-    // En OrangeHRM v5+, las filas son divs con role='row' dentro del body
-    private By tableRows = By.xpath("//div[@class='oxd-table-body']//div[@role='row']");
-    // Las celdas son divs con clase 'oxd-table-cell'
-    private By tableCells = By.className("oxd-table-cell");
+    private By adminLink = locators.getLocator("usermgmt.admin.link");
+    private By tableRows = locators.getLocator("usermgmt.table.rows");
+    private By tableCells = locators.getLocator("usermgmt.table.cells");
 
     // Constructor
     public UserManagementPage(WebDriver driver) {
