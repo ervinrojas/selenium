@@ -1,5 +1,6 @@
 package com.ervinrojas.pages;
 
+import com.ervinrojas.util.LocatorManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -14,17 +15,18 @@ public class AddUserPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private LocatorManager locators = LocatorManager.getInstance();
 
     // Locators
-    private By lknAdmin = By.linkText("Admin");
-    private By addBtn = By.cssSelector("i.bi-plus");
-    private By userRoleDd = By.xpath("(//div[@class='oxd-select-wrapper'])[1]");
-    private By employeeInput = By.cssSelector("input[placeholder='Type for hints...']");
-    private By userStatusDd = By.xpath("(//div[@class='oxd-select-wrapper'])[2]");
-    private By usernameInput = By.cssSelector("input.oxd-input:nth-child(1)");
-    private By passwordInput = By.xpath("(//input[@class='oxd-input oxd-input--active'])[2]");
-    private By confirmPasswordInput = By.xpath("(//input[@type='password'])[2]");
-    private By saveBtn = By.xpath("//button[@type='submit']");
+    private By lknAdmin = locators.getLocator("adduser.admin.link");
+    private By addBtn = locators.getLocator("adduser.add.button");
+    private By userRoleDd = locators.getLocator("adduser.role.dropdown");
+    private By employeeInput = locators.getLocator("adduser.employee.input");
+    private By userStatusDd = locators.getLocator("adduser.status.dropdown");
+    private By usernameInput = locators.getLocator("adduser.username.input");
+    private By passwordInput = locators.getLocator("adduser.password.input");
+    private By confirmPasswordInput = locators.getLocator("adduser.confirm.password.input");
+    private By saveBtn = locators.getLocator("adduser.save.button");
 
     // Constructor
     public AddUserPage(WebDriver driver) {
@@ -34,14 +36,11 @@ public class AddUserPage {
 
     // Método para ir a la sección de Add User
     public void irAAddUser() {
-        // Esperar a que el botón Add User esté visible
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement adminLink = wait.until(ExpectedConditions.visibilityOfElementLocated(lknAdmin));
         adminLink.click();
     }
 
     public void clickAddBtn() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement clickAddButton = wait.until(ExpectedConditions.visibilityOfElementLocated(addBtn));
         clickAddButton.click();
     }
@@ -49,9 +48,12 @@ public class AddUserPage {
     private void selectDropdown(By dropdownLocator, String optionText){
         WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownLocator));
         dropdown.click();
-        By optionLocator = By.xpath("//div[contains(@class, 'oxd-select-option')]//span[normalize-space(text())='"+ optionText +"']");
+
+        String xpathTemplate = locators.getProperty("adduser.dropdown.option.template");
+        String dynamicXpath = String.format(xpathTemplate, optionText);
+
         try {
-            WebElement option = wait.until(ExpectedConditions.elementToBeClickable(optionLocator));
+            WebElement option = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(dynamicXpath)));
             option.click();
         }catch (org.openqa.selenium.TimeoutException e){
             System.out.println(">>>ERROR: System cannot find option '"+optionText+ "'");
@@ -66,7 +68,6 @@ public class AddUserPage {
 
     // Acción de llenar el formulario
     public void crearUsuario(String role, String employeeName, String status, String username,String password) {
-        // Esperar a que los campos sean visibles
         selectDropdown(userRoleDd, role);
         selectDropdown(userStatusDd, status);
 
@@ -74,11 +75,11 @@ public class AddUserPage {
         empInput.click();
         empInput.sendKeys(employeeName);
 
-        By suggestionLocator = By.xpath("//input[@placeholder='Type for hints...']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(suggestionLocator));
-        By optionLocator = By.xpath("//div[@role='option']//span[contains(text(), '"+employeeName+"')]");
+        String empXpathTemplate = locators.getProperty("adduser.employee.suggestion.template");
+        String dynamicEmpXpath = String.format(empXpathTemplate, employeeName);
+
         try{
-            WebElement suggestion = wait.until(ExpectedConditions.elementToBeClickable(optionLocator));
+            WebElement suggestion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(dynamicEmpXpath)));
             suggestion.click();
         }catch (TimeoutException e){
             System.out.println("Employee was not found: '"+employeeName+"' in dropdown list");

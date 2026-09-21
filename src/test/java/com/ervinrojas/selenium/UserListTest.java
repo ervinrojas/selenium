@@ -1,13 +1,13 @@
 package com.ervinrojas.selenium;
 
 import com.ervinrojas.pages.UserManagementPage;
-import com.ervinrojas.util.BaseTest;
+import com.ervinrojas.util.AuthenticatedTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class UserListTest extends BaseTest {
+public class UserListTest extends AuthenticatedTest {
 
     @Test
     public void testListarUsuarios() {

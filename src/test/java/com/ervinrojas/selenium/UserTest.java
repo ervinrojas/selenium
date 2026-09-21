@@ -2,13 +2,13 @@ package com.ervinrojas.selenium;
 
 import com.ervinrojas.factory.UserFactory;
 import com.ervinrojas.pages.AddUserPage;
-import com.ervinrojas.util.BaseTest;
+import com.ervinrojas.util.AuthenticatedTest;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UserTest extends BaseTest {
+public class UserTest extends AuthenticatedTest {
 
     @Test
     public void testCrearNuevoUsuario() throws InterruptedException {
