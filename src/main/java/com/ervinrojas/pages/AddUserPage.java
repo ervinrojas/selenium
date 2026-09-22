@@ -18,7 +18,7 @@ public class AddUserPage {
     private LocatorManager locators = LocatorManager.getInstance();
 
     // Locators
-    private By lknAdmin = locators.getLocator("adduser.admin.link");
+    private By lknAdmin = locators.getLocator("usermgmt.admin.link");
     private By addBtn = locators.getLocator("adduser.add.button");
     private By userRoleDd = locators.getLocator("adduser.role.dropdown");
     private By employeeInput = locators.getLocator("adduser.employee.input");
