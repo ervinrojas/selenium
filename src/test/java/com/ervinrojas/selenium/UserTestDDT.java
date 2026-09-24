@@ -35,7 +35,7 @@ public class UserTestDDT extends AuthenticatedTest {
         String username = dynamicData.username;
         String password = dynamicData.password;
 
-        //User navigates to Add user page
+        // 1. User navigates to Add user page
         driver.get(config.getString("base.url")+"web/index.php/admin/saveSystemUser");
         AddUserPage addUserPage = new AddUserPage(driver);
 
@@ -47,7 +47,7 @@ public class UserTestDDT extends AuthenticatedTest {
                 password
         );
 
-        // 3. Crear nuevo usuario
+        // 2. Create a new user
         By toastLocator = By.cssSelector("p.oxd-text--toast-message");
         WebDriverWait waitToast = new WebDriverWait(driver, Duration.ofSeconds(10));
 
