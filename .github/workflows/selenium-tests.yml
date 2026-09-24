@@ -24,7 +24,7 @@ jobs:
           chrome-version: stable
 
       - name: Run Tests
-        run: mvn clean test # Ejecuta las pruebas de TestNG
+          run: mvn clean test -Dheadless=true # <--- AÑADIR ESTO
 
       - name: Upload Test Reports
         if: always() # Sube los reportes aunque las pruebas fallen

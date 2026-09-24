@@ -21,11 +21,11 @@ public class AuthenticatedTest extends BaseTest {
     @BeforeSuite
     public void LoginOnce(){
         ChromeOptions options = new ChromeOptions();
-        if("true".equals(System.getenv("CI"))){
-            options.addArguments("--headless","--no-sandbox","--disable-dev-shm-usage");
+        if("true".equals(System.getProperty("headless"))){
+            options.addArguments("--headless=new","--no-sandbox","--disable-dev-shm-usage","window-size=1920,1080");
         }
         // Creamos un driver temporal solo para obtener las cookies
-        WebDriver driverLogin = new ChromeDriver();
+        WebDriver driverLogin = new ChromeDriver(options);
         driverLogin.get(config.getString("base.url"));
 
         LoginPage loginPage = new LoginPage(driverLogin);

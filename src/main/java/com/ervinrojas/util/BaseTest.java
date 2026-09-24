@@ -30,10 +30,11 @@ public class BaseTest {
     @BeforeMethod
     public void setupTest(){
         ChromeOptions options = new ChromeOptions();
-        if ("true".equals(System.getenv("CI"))){
-            options.addArguments("--headless");
-            options.addArguments("--nno-sandbox");
+        if ("true".equals(System.getProperty("headless"))){
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
         }
 
         driver = new ChromeDriver(options);
