@@ -3,16 +3,18 @@ package com.ervinrojas.selenium;
 import com.ervinrojas.factory.UserFactory;
 import com.ervinrojas.pages.AddUserPage;
 import com.ervinrojas.util.AuthenticatedTest;
+import com.ervinrojas.util.TestListener;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.time.Duration;
 
+@Listeners(TestListener.class)
 public class UserTestDDT extends AuthenticatedTest {
 
     @DataProvider(name = "userDataProvider")

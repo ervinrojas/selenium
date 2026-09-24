@@ -1,0 +1,36 @@
+name: Selenium Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Usa un servidor Linux de GitHub
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run Tests
+        run: mvn clean test # Ejecuta las pruebas de TestNG
+
+      - name: Upload Test Reports
+        if: always() # Sube los reportes aunque las pruebas fallen
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            test-output/
+            screenshots/

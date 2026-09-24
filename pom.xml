@@ -94,6 +94,12 @@
             <version>4.6.0</version>
             <scope>compile</scope>
         </dependency>
+        <!-- ExtentReports para TestNG -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.2</version>
+        </dependency>
 
     </dependencies>
 

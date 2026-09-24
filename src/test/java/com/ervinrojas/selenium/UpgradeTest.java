@@ -2,11 +2,13 @@ package com.ervinrojas.selenium;
 
 import com.ervinrojas.pages.HeaderPage;
 import com.ervinrojas.util.AuthenticatedTest;
+import com.ervinrojas.util.TestListener;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import java.util.Set;
 
+@Listeners(TestListener.class)
 public class UpgradeTest extends AuthenticatedTest {
 
     @Test

@@ -3,14 +3,17 @@ package com.ervinrojas.selenium;
 import com.ervinrojas.factory.UserFactory;
 import com.ervinrojas.pages.AddUserPage;
 import com.ervinrojas.util.AuthenticatedTest;
+import com.ervinrojas.util.TestListener;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
 
+@Listeners(TestListener.class)
 public class UserTest extends AuthenticatedTest {
 
-    @Test
+    @Test(groups = {"users","regression"})
     public void testCrearNuevoUsuario() throws InterruptedException {
 
         SoftAssert softAssert = new SoftAssert();

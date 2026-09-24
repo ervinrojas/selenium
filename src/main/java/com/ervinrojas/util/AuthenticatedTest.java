@@ -5,6 +5,7 @@ import com.ervinrojas.pages.LoginPage;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
@@ -19,6 +20,10 @@ public class AuthenticatedTest extends BaseTest {
     // Se ejecuta UNA vez antes de toda la suite de pruebas autenticadas
     @BeforeSuite
     public void LoginOnce(){
+        ChromeOptions options = new ChromeOptions();
+        if("true".equals(System.getenv("CI"))){
+            options.addArguments("--headless","--no-sandbox","--disable-dev-shm-usage");
+        }
         // Creamos un driver temporal solo para obtener las cookies
         WebDriver driverLogin = new ChromeDriver();
         driverLogin.get(config.getString("base.url"));
