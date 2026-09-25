@@ -1,8 +1,10 @@
 name: Selenium Tests
 
 on:
+  push:
+    branches: [ main ] # Se ejecuta al hacer push a main
   pull_request:
-    branches: [ main ]
+    branches: [ main ] # Se ejecuta al abrir un PR a main
 
 jobs:
   test:
