@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest # Usa un servidor Linux de GitHub
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -24,10 +24,10 @@ jobs:
           chrome-version: stable
 
       - name: Run Tests
-          run: mvn clean test -Dheadless=true # <--- AÑADIR ESTO
+        run: mvn clean test -Dheadless=true
 
       - name: Upload Test Reports
-        if: always() # Sube los reportes aunque las pruebas fallen
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
