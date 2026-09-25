@@ -4,7 +4,6 @@ import com.ervinrojas.util.LocatorManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -15,7 +14,7 @@ public class LoginPage {
     private WebDriverWait wait;
     private LocatorManager locators = LocatorManager.getInstance();
 
-    // Localizadores (Selectores corregidos)
+    // Locators
     private By usernameInput = locators.getLocator("login.username.input");
     private By passwordInput = locators.getLocator("login.password.input");
     private By loginButton = locators.getLocator("login.submit.button");
@@ -26,7 +25,7 @@ public class LoginPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // Acciones
+    // Actions
     public void escribirUsuario(String usuario) {
         WebElement userInput = wait.until(ExpectedConditions.elementToBeClickable(usernameInput));
         userInput.sendKeys(usuario);
